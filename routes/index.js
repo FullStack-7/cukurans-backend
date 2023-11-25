@@ -7,6 +7,9 @@ const barberRoute = require('./barber.route')
 const serviceRoute = require('./service.route')
 const orderRoute = require('./order.route')
 const paymentRoute = require('./payment.route')
+const ratingRoute = require('./rating.route')
+const kontakRoute = require('./kontak.route')
+const adminRoute = require('./admin.route')
 
 route.get("/", (reqmres) => {
     res.json("Express Mongose halo")
@@ -18,5 +21,8 @@ route.use("/barbers", barberRoute )
 route.use("/services", serviceRoute )
 route.use("/orders", orderRoute)
 route.use("/payments", paymentRoute)
+route.use("/rating", ratingRoute)
+route.use("/kontak", kontakRoute)
+route.use('/admin', adminRoute)
 
 module.exports = route
