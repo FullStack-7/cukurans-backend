@@ -16,7 +16,7 @@ const barberSchema = new mongoose.Schema({
       ref: 'Service',
     }],
     image: String,
-    price: String
+    price: Number,
 })
 
 const Barber = mongoose.model("Barber", barberSchema)

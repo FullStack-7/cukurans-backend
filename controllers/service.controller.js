@@ -95,4 +95,21 @@ module.exports = {
           });
         }
       },
-}
+
+      updateData: async (req, res) => {
+        const { id } = req.params;
+        const { name, description, price, image } = req.body;
+
+        try {
+          const service = await Service.findByIdAndUpdate(id, { name, description, price, image }, { new: true });
+
+          if (!service) {
+            return res.status(404).json({ message: 'Service tidak ditemukan' });
+          }
+
+          res.status(200).json({ service });
+        } catch (error) {
+          res.status(500).json({ message: 'Gagal melakukan update pada service', error: error.message });
+        }
+            }
+  }
