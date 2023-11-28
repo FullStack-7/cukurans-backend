@@ -15,6 +15,8 @@ const barberSchema = new mongoose.Schema({
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Service',
     }],
+    image: String,
+    price: String
 })
 
 const Barber = mongoose.model("Barber", barberSchema)
