@@ -65,11 +65,20 @@ module.exports = {
       try {
         const userId = req.params.id;
         let updatedData = req.body;
+    
         if (req.body.password) {
           const hashedPassword = await bcrypt.hash(req.body.password, 10);
           updatedData.password = hashedPassword;
         }
-         const updatedUser = await User.findByIdAndUpdate(userId, updatedData, { new: true });
+    
+        if (req.body.file) {
+          const result = await cloudinary.uploader.upload(req.body.file, {
+            folder: 'barber_online'
+          });
+          updatedData.foto_profil = result.secure_url;
+        }
+    
+        const updatedUser = await User.findByIdAndUpdate(userId, updatedData, { new: true });
         if (!updatedUser) {
           return res.status(404).json({
             message: 'Pengguna tidak ditemukan',
@@ -77,12 +86,12 @@ module.exports = {
         }
         
         res.json({
-          message: 'Berhasil memperbarui pengguna',
+          message: 'Berhasil memperbarui profil pengguna',
           data: updatedUser,
         });
       } catch (error) {
         res.status(500).json({
-          message: 'Gagal memperbarui pengguna',
+          message: 'Gagal memperbarui profil pengguna',
           error: error.message,
         });
       }

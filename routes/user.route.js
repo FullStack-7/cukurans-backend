@@ -1,6 +1,6 @@
 const express = require('express')
 const vt = require('../middleware/auth')
-const { getAllUser, getByIdUser, addUser, updateUser, deleteUserById, uploudFoto } = require('../controllers/user.controller')
+const { getAllUser, getByIdUser, addUser, updateUser, deleteUserById } = require('../controllers/user.controller')
 const route = express.Router()
 
 
@@ -11,8 +11,6 @@ route.post('/', addUser)
 route.delete('/:id', deleteUserById )
 // untuk mengganti userisi profile
 route.put('/userprofile/:id' ,updateUser)
-// uploud foto
-route.post('/:Id/avatar', uploudFoto)
 
 
 
